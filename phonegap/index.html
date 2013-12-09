@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exotix Pizza</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"/>
+
+
+</head>
+
+
+<body>
+
+<!-- Home #############################################################################333-->
+<div data-role="page" id="home">
+
+    <div data-role="header" data-theme="a">
+        <h1>Exotix Pizza</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" data-theme="b">
+        <section><p>
+            <img src="images/pizza2.jpg" width="120" height="80" alt="">
+            <img src="images/pizza3.jpg" width="120" height="80" alt="">
+            <img src="images/flatbread.jpg" width="120" height="80" alt="">
+            <img src="images/drinks.jpg" width="120" height="80" alt="">
+        </section>
+
+        <h3>Main Menu:</h3>
+        <p><a href="tel:+15095555555" data-role="button">Call us free!</a></p>
+        <p><a href="#menu" data-role="button">Menu</a></p>
+        <p><a href="#order" data-role="button">Order</a></p>
+        <p><a href="#contacts" data-role="button">Contacts</a></p>
+        <p><a href="#map" data-role="button" class="directions">Map</a></p>
+        <p><a href="#compass" data-role="button">Compass</a></p>
+        <p><a href="#aboutus" data-role="button">About Us</a></p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-theme="a">
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+    </div>
+</div>
+
+<!-- Map##################################################################################3-->
+<div data-role="page" id="map" data-theme="b">
+
+    <div data-role="header">
+        <h1>Map</h1>
+    </div>
+
+    <div data-role="content" data-theme="b">
+        <div id="container">
+            <div class="no-geolocation">
+                <p class="warning">Your device does not support Geolocation. Please enter your zipcode and try again.</p>
+                <input type="text" placeholder="Enter postcode or address" class="manual-location">
+            </div>
+            <a href="#" class="get-directions">Get Directions</a>
+
+        </div>
+
+    <p><a href="#home" data-direction="reverse" data-role="button" data-theme="b">Main Menu</a></p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+    </div>
+</div>
+
+<!-- Contacts ##########################################################################-->
+<div data-role="page" id="contacts" data-theme="b">
+
+    <div data-role="header">
+        <h1>Contacts</h1>
+    </div>
+    <script>
+
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+            // create a new contact
+            var contact = navigator.contacts.create();
+
+            // store contact phone numbers in ContactField[]
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('work', '212-555-1234', false);
+            phoneNumbers[1] = new ContactField('mobile', '917-555-5432', true); // preferred number
+            phoneNumbers[2] = new ContactField('home', '203-555-7890', false);
+            contact.phoneNumbers = phoneNumbers;
+
+            // save the contact
+            contact.save();
+
+            // search contacts, returning display name and phone numbers
+            var options = new ContactFindOptions();
+            options.filter="";
+            filter = ["displayName","phoneNumbers"];
+            navigator.contacts.find(filter, onSuccess, onError, options);
+        }
+
+        // onSuccess: Get a snapshot of the current contacts
+        //
+        function onSuccess(contacts) {
+            for (var i=0; i<contacts.length; i++) {
+                // display phone numbers
+                for (var j=0; j<contacts[i].phoneNumbers.length; j++) {
+                    alert("Type: " + contacts[i].phoneNumbers[j].type + "\n" +
+                            "Value: "  + contacts[i].phoneNumbers[j].value + "\n" +
+                            "Preferred: "  + contacts[i].phoneNumbers[j].pref);
+                }
+            }
+        };
+
+        // onError: Failed to get the contacts
+        //
+        function onError(contactError) {
+            alert('onError!');
+        }
+
+    </script>
+
+    <p>Find Contacts</p>
+
+    <!-- /content -->
+    <!-- /footer -->
+    <div data-role="footer">
+
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+
+    </div>
+    <!-- /footer -->
+</div>
+
+
+
+<!-- Call Us##############################################################################3-->
+<div data-role="page" id="callus" data-theme="b">
+
+    <div data-role="header">
+        <h1>Call Us</h1>
+    </div>
+    <!-- /header -->
+
+    <!-- /content -->
+    <!-- /footer -->
+    <div data-role="footer">
+
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+
+    </div>
+    <!-- /footer -->
+</div>
+<!-- /page Call Us -->
+
+<!-- Menu ##################################################################################-->
+<div data-role="page" id="menu">
+    <div data-role="header">
+        <h1>Menu</h1>
+    </div>
+    <div data-role="content" data-theme="b">
+        <h2 class="product">Crusts:</h2>
+
+        <div data-product="crust" class="product">
+            <span data-role="button" data-name="thincrust" data-price="8" class="btnCart">Thin Crust $8.00</span>
+            <span data-role="button" data-name="deepdish" data-price="12" class="btnCart">Deep Dish $12.00</span>
+            <span data-role="button" data-name="naan" data-price="10" class="btnCart">Naan $10.00</span>
+        </div>
+        <h2 class="product">Toppings:</h2>
+
+        <div data-product="toppings" class="product">
+            <span data-name="duck" data-role="button" class="btnCart" data-price="4">Duck Confit $4.00</span>
+            <span data-name="lamb" data-role="button" class="btnCart" data-price="4">Ground Lamb $4.00</span>
+            <span data-name="pancetta" data-role="button" class="btnCart" data-price="3">Pancetta $3.00</span>
+            <span data-name="garlic" data-role="button" class="btnCart" data-price="2">Black Garlic $2.00</span>
+            <span data-name="olives" data-role="button" class="btnCart" data-price="2">Greek Olives $2.00</span>
+        </div>
+        <h2 class="product">Drinks:</h2>
+
+        <div data-product="drinks" class="product">
+            <span data-name="Pepsi" data-role="button" class="btnCart" data-price="2">Pepsi $2.00</span>
+            <span data-name="lemonade" data-role="button" class="btnCart" data-price="2">Lemonade $2.00</span>
+            <span data-name="water" data-role="button" class="btnCart" data-price="2">Bottled Water $2.00</span>
+            <span data-name="milk" data-role="button" class="btnCart" data-price="2">Milk $2.00</span>
+        </div>
+        <h2>Your Order:</h2>
+        <div id="cartDiv">
+        </div>
+        <div>
+            <span data-role="button" id="buy">Place Order</span>
+        </div>
+        <p><a href="#home" data-direction="reverse" data-role="button" data-theme="b">Main Menu</a></p>
+    </div>
+    <div data-role="footer">
+
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script>
+    var cart = [];
+
+    function displayOrder(){
+        var cartDiv = $("#cartDiv");
+        cartDiv.html("");
+        var total = 0;
+        for(var item in cart){
+            var qty = cart[item].qty;
+            var price = cart[item].price;
+            var subtotal = qty * price;
+            total += subtotal;
+            cartDiv.append('<p>&nbsp;&nbsp;' + cart[item].name + ": " + qty + " x " + price.toFixed(2) + " = " + "$" + subtotal.toFixed(2) + '</p>');
+        }
+        cartDiv.append('<h3>' + 'Order Total:        $' + total.toFixed(2) + '</h3>');
+    }
+    $(document).ready(function () {
+        $('.btnCart').on("click", function(event){
+            var id = $(this).data("name");
+            console.log(id);
+            if (cart[id]) {
+                cart[id].qty += 1;
+                console.log(id);
+            } else {
+                cart[id] = new Object();
+                cart[id].qty = 1;
+
+                cart[id].name = $(this).data("name");
+                cart[id].price = $(this).data("price");
+            }
+            displayOrder();
+        })
+
+        $('#buy').on("click", function(event){
+            var buyUrl = "";
+            for(var item in cart){
+                buyUrl += "&id[]=" + item + "&qty[]=" + cart[item].qty;
+            }
+            $.getJSON('order.php?' + buyUrl, function(data){
+                $("#cartDiv").append(data);
+            });
+            console.log("http://mobileproduction.justkrys1.com/order.php?" + buyUrl);
+            $("#buy").parent().hide();
+            //$(".product").hide();
+        })
+    })
+</script>
+
+<!-- Order #################################################################################-->
+<div data-role="page" id="order" data-theme="b">
+    <div data-role="header">
+        <h1>Order</h1>
+    </div>
+    <!-- /header -->
+    <div data-role="content" data-theme="b">
+
+        <h1>Your Order:</h1>
+        <h4>Crust: $crust</h4>
+        <h4>Toppings: $ingredients</h4>
+        <h4>Drinks: $drinks</h4>
+
+        <p><a href="email.php" rel="external" data-role="button" data-theme="b">Add to Favorites</a></p>
+
+        <p><a href="mailto:justkrys1@yahoo.com" rel="external" data-role="button" data-theme="b">Add to Order</a></p>
+
+        <h1>Your Favorite:</h1>
+        <h4>Crust: $crust</h4>
+        <h4>Toppings: $ingredients</h4>
+        <h4>Drinks: $drinks</h4>
+
+        <p><a href="email.php" rel="external" data-role="button" data-theme="b">Order Favorite</a></p>
+<p><a href="email.php" rel="external" data-role="button" data-theme="b">Submit Order</a></p>
+
+        <p><a href="#home" data-direction="reverse" data-role="button" data-theme="b">Main Menu</a></p>
+
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer">
+
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+
+    </div>
+    <!-- /footer -->
+</div>
+
+
+<!-- Compass##################################################################################-->
+<div data-role="page" id="compass" data-theme="b">
+
+    <div data-role="header">
+        <h1>Compass</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" data-theme="b">
+        <section>
+            <script>
+            // The watch id references the current `watchHeading`
+            var watchID = null;
+
+            // Wait for device API libraries to load
+            //
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // device APIs are available
+            //
+            function onDeviceReady() {
+            startWatch();
+            }
+
+            // Start watching the compass
+            //
+            function startWatch() {
+
+            // Update compass every 3 seconds
+            var options = { frequency: 3000 };
+
+            watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+            }
+
+            // Stop watching the compass
+            //
+            function stopWatch() {
+            if (watchID) {
+            navigator.compass.clearWatch(watchID);
+            watchID = null;
+            }
+            }
+
+            // onSuccess: Get the current heading
+            //
+            function onSuccess(heading) {
+            var element = document.getElementById('heading');
+            element.innerHTML = 'Heading: ' + heading.magneticHeading;
+            }
+
+            // onError: Failed to get the heading
+            //
+            function onError(compassError) {
+            alert('Compass error: ' + compassError.code);
+            }
+
+            </script>
+            <div id="heading">Waiting for heading...</div>
+            <button onclick="startWatch();">Start Watching</button>
+            <button onclick="stopWatch();">Stop Watching</button>
+        </section>
+
+        <p><a href="#home" data-direction="reverse" data-role="button" data-theme="b">Main Menu</a></p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+    </div>
+</div>
+
+<!-- About Us##############################################################################-->
+<div data-role="page" id="aboutus" data-theme="b">
+
+    <div data-role="header">
+        <h1>About Us</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content" data-theme="b">
+        <aside><img src="images/cafe.jpg" width="130" height="80" alt=""><img src="images/market.jpg" width="130"
+                                                                              height="80" alt=""></aside>
+        <p>Our goal since we opened in 2008 has been to provide the freshest, most unique flavor combinations on the
+            pizza scene. Our menu lists the staples of the concept but we're always looking for new and exciting
+            ingredients to try out, so please ask about current specialty items.
+            Staffing just a few highly-skilled people has allowed us to train them with the knowledge of our
+            ingredients, but has also let us keep down costs, assuring that everyone can afford a taste of the
+            exotix!</p>
+
+        <p><a href="#home" data-direction="reverse" data-role="button" data-theme="b">Main Menu</a></p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+
+        <p>&copy; exotix pizza | Copyright: 2012 | Designer: Krys Ragan</p>
+
+    </div>
+    <!-- /footer -->
+</div>
+
+
+
+
+<!-- Script####################################################################################-->
+
+
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+        var startingLocation;
+        var destination = "123+N+Division+St,+Spokane,+WA";
+
+        $('a.get-directions').click(function (e) {
+            e.preventDefault();
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    startingLocation = latitude + "," + longitude;
+                    goToGoogleMaps(startingLocation, destination);
+
+                });
+            }
+            else {
+                startingLocation = $('.manual-location').val();
+                if (startingLocation != '') {
+                    goToGoogleMaps(startingLocation, destination);
+                }
+                else {
+                    $('.no-geolocation').fadeIn();
+                }
+
+            }
+            function goToGoogleMaps(startingLocation, destination) {
+                window.location = "https://maps.google.com/maps?saddr=" + startingLocation + "&daddr=" + destination;
+            }
+
+        });
+
+    });
+</script>
+
+
+
+</body>
+</html>
